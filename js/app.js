@@ -6,6 +6,94 @@
 // Made input disappear after submitting
 //Bug. I had setInterval in my code instead of setTimeout. 
 
+
+
+(function() {
+
+  // global variables
+
+  let inputBill = document.querySelector('#input-bill');
+  let inputUsers = document.querySelector('#input-users');
+  let inputService = document.querySelector('#input-service');
+
+  let button = document.querySelector('.submitBtn');
+
+  let tipAmount = document.querySelector('#tip-amount');
+  let totalAmount = document.querySelector('#total-amount');
+  let personAmount = document.querySelector('#person-amount');
+
+  const services = [{
+    value: 1,
+    title: 'great -20%'
+  },{
+    value: 2,
+    title: 'great -10%'
+  },{
+    value: 3,
+    title: 'great -2%'
+  }]
+
+ console.log(services[1])
+
+
+})();
+
+
+//Set up a service array
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 (function(){
   
 //Set up a service array
@@ -143,3 +231,4 @@ services.forEach(function(service){
   
 })();
 
+*/
