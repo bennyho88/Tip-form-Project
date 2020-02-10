@@ -16,30 +16,95 @@
   let inputUsers = document.querySelector('#input-users');
   let inputService = document.querySelector('#input-service');
 
+  let inputForms = document.querySelectorAll('.form-control');
   let button = document.querySelector('.submitBtn');
 
   let tipAmount = document.querySelector('#tip-amount');
   let totalAmount = document.querySelector('#total-amount');
   let personAmount = document.querySelector('#person-amount');
 
+  let result = document.querySelector('.results');
+
   const services = [{
     value: 1,
     title: 'great -20%'
   },{
     value: 2,
-    title: 'great -10%'
+    title: 'good -10%'
   },{
     value: 3,
-    title: 'great -2%'
+    title: 'bad -2%'
   }]
 
- console.log(services[1])
+// get value from the inputs
+
+// value inputbill
+
+inputBill.addEventListener('keyup', function(e) {
+  
+  
+  let billValue = e.target.value;
+  console.log('check billvalue:' + billValue);
+  
+})
+
+// value inputusers
+
+inputUsers.addEventListener('keyup', function(e) {
+
+  let usersValue = e.target.value;
+  console.log('check usersvalue:' + usersValue)
+})
+
+// value inputservice
+console.log('this is the inputService: ' + inputService.value);
+
+// click event button
+button.addEventListener('click', function(e) {
+
+  e.preventDefault();
+
+// display results for 5 sec
+  result.style.display = 'block';
+//display the values in text
+
+tipAmount.textContent = inputBill.value;
+totalAmount.textContent = inputUsers.value;
+  
+})
+
+// create options element with the selected options
+
+const option1 = document.createElement('option');
+const option2 = document.createElement('option');
+const option3 = document.createElement('option');
+
+// add title in textcontent option
+option1.textContent = services[0].title;
+option2.textContent = services[1].title;
+option3.textContent = services[2].title;
+
+// add attribute with value in option
+option1.setAttribute('value', 1);
+option2.setAttribute('value', 2);
+option3.setAttribute('value', 3);
+
+// append option to select
+inputService.append(option1);
+inputService.append(option2);
+inputService.append(option3);
+
 
 
 })();
 
 
-//Set up a service array
+
+
+
+
+
+
 
 
 
