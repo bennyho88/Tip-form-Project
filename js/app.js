@@ -19,6 +19,16 @@
   let inputForms = document.querySelectorAll('.form-control');
   let button = document.querySelector('.submitBtn');
 
+  let feedbackSection = document.querySelector('.feedback');
+
+  // text that needs to be added in the feedback section
+
+  //Bill Amount Cannot Be Blank
+
+  // Number Of Users Must Be Greater Than Zero
+
+  // You Must Select A Service
+
   let tipAmount = document.querySelector('#tip-amount');
   // input bill / 20% || 10% || 2%
   let totalAmount = document.querySelector('#total-amount');
@@ -48,7 +58,7 @@
   let billValue = e.target.value;
   console.log('check billvalue:' + billValue);
   
- // return inputBill;
+  return inputBill;
 })
 
 // value inputusers
@@ -59,7 +69,7 @@
   console.log('check usersvalue:' + usersValue)
 
  
- // return usersValue;
+  return usersValue;
 })
 
 // value inputservice
