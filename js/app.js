@@ -20,9 +20,11 @@
   let button = document.querySelector('.submitBtn');
 
   let tipAmount = document.querySelector('#tip-amount');
+  // input bill / 20% || 10% || 2%
   let totalAmount = document.querySelector('#total-amount');
+  // inputbill + tipamount
   let personAmount = document.querySelector('#person-amount');
-
+  // totalamount / inputusers
   let result = document.querySelector('.results');
 
   const services = [{
@@ -40,24 +42,51 @@
 
 // value inputbill
 
-inputBill.addEventListener('keyup', function(e) {
+ inputBill.addEventListener('keyup', function totalBill(e) {
   
   
   let billValue = e.target.value;
   console.log('check billvalue:' + billValue);
   
+ // return inputBill;
 })
 
 // value inputusers
 
-inputUsers.addEventListener('keyup', function(e) {
+ inputUsers.addEventListener('keyup', function totalUsers(e) {
 
   let usersValue = e.target.value;
   console.log('check usersvalue:' + usersValue)
+
+ 
+ // return usersValue;
 })
 
 // value inputservice
-console.log('this is the inputService: ' + inputService.value);
+
+inputService.addEventListener('change', function(e) {
+
+  let serviceValue = e.target.value;
+  console.log('check serviceValue: ' + serviceValue);
+  console.log(typeof serviceValue);
+  let valueNumber = ''
+  
+  if(serviceValue === '1') {
+    valueNumber = 20;
+    console.log('valuenumber 1: ' + valueNumber);
+  } else if (serviceValue === '2') {
+    valueNumber = 10;
+    console.log('valuenumber 2: ' + valueNumber);
+  } else if(serviceValue === '3') {
+    valueNumber = 2;
+    console.log('valuenumber 3: ' + valueNumber);
+  }
+
+  return valueNumber
+
+  console.log('return valuenumber' + valueNumber)
+  
+})
 
 // click event button
 button.addEventListener('click', function(e) {
@@ -68,8 +97,13 @@ button.addEventListener('click', function(e) {
   result.style.display = 'block';
 //display the values in text
 
-tipAmount.textContent = inputBill.value;
-totalAmount.textContent = inputUsers.value;
+// console.log(totalBill());
+
+/*
+tipAmount.textContent = totalBill();
+totalAmount.textContent = totalUsers();
+*/
+
   
 })
 
