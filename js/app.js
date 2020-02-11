@@ -7,7 +7,7 @@
 //Bug. I had setInterval in my code instead of setTimeout. 
 
 
-
+/*
 (function () {
 
   // global variables
@@ -15,21 +15,14 @@
   let inputBill = document.querySelector('#input-bill');
   let inputUsers = document.querySelector('#input-users');
   let inputService = document.querySelector('#input-service');
-
+  console.log('check inputService: ' + inputService.value);
   let inputForms = document.querySelectorAll('.form-control');
   let button = document.querySelector('.submitBtn');
 
   let feedback = document.querySelector('.feedback');
 
-  // text that needs to be added in the feedback section
-
-  //Bill Amount Cannot Be Blank
-
-  // Number Of Users Must Be Greater Than Zero
-
-  // You Must Select A Service
-
   let tipAmount = document.querySelector('#tip-amount');
+  
   // input bill / 20% || 10% || 2%
   let totalAmount = document.querySelector('#total-amount');
   // inputbill + tipamount
@@ -63,7 +56,7 @@
 
   // value inputusers
 
-  inputUsers.addEventListener('keyup', function (e) {
+  inputUsers.addEventListener('keyup', function totalAmount(e) {
 
     let usersValue = e.target.value;
     console.log('check usersvalue:' + usersValue)
@@ -128,11 +121,9 @@
     feedback.classList.add('showItem');
     feedback.classList.add('alert-danger');
 
-    setInterval(function() {
+    setTimeout(function() {
       feedback.classList.remove('showItem');
     }, 5000)
-
-    
 
     
     if(inputBill.value !== '') {
@@ -155,25 +146,22 @@
     }  else if (inputService.value === '1' || inputService.value === '2' || inputService.value === '3') {
       feedbackTextService.style.display = 'none';
     }
-    
-    
-  
-
-
 
     // display results for 5 sec
     result.style.display = 'block';
     //display the values in text
 
-    // console.log(totalBill());
-
-
-    tipAmount.textContent = inputBill.value;
+    tipAmount.textContent = inputBill.value ;
     totalAmount.textContent = inputUsers.value;
 
-
-
   })
+
+  function calculateTip(inputBill, inputUsers, inputService) {
+
+    console.log('this is inputvaluebill: ' + inputBill)
+  }
+
+  calculateTip(totalAmount())
 
   // create options element with the selected options
 
@@ -196,112 +184,52 @@
   inputService.append(option2);
   inputService.append(option3);
 
-
-
 })();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-(function(){
-
-//Set up a service array
-const services = [{
-  value: 1,
-  title: "great - 20%"
-},{
-  value: 2,
-  title: "good - 10%"
-},{
-  value: 3,
-  title: "bad - 2%"
-}]
-
-
-
-  const validateInput = function(billAmount, numUsers, selectedService){
-
-   let isFeedback = false;
-   const feedback = document.querySelector('.feedback');
+*/
+
+(function () {
+
+  //Set up a service array
+  const services = [{
+    value: 1,
+    title: "great - 20%"
+  }, {
+    value: 2,
+    title: "good - 10%"
+  }, {
+    value: 3,
+    title: "bad - 2%"
+  }]
+
+
+  const validateInput = function (billAmount, numUsers, selectedService) {
+
+    // set to false cause it doesn't have to be shown if everything has been given
+    let isFeedback = false;
+    const feedback = document.querySelector('.feedback');
     feedback.innerHTML = '';
 
-     if  (billAmount === "" || billAmount <="0"){
-        feedback.classList.add('showItem', 'alert-danger');
-        feedback.innerHTML += `<p>Bill amount cannot be blank</p>`
-        isFeedback = true;
+    // display text for bill
+    if (billAmount === "" || billAmount <= "0") {
+      feedback.classList.add('showItem', 'alert-danger');
+      feedback.innerHTML += `<p>Bill amount cannot be blank</p>`
+      isFeedback = true;
     }
 
-    if (numUsers <= "0"){
+    // display text for users
+    if (numUsers <= "0") {
       feedback.classList.add('showItem', 'alert-danger');
       feedback.innerHTML += `<p>Number of users must be greater than zero</p>`;
-       isFeedback = true;
-    }
-
-   if (selectedService === "0"){
-     feedback.classList.add('showItem', 'alert-danger');
-     feedback.innerHTML += `<p>You must select a Service</p>`
       isFeedback = true;
-   }
-
-    setTimeout(function(){
+    }
+    // display text for services
+    if (selectedService === "0") {
+      feedback.classList.add('showItem', 'alert-danger');
+      feedback.innerHTML += `<p>You must select a Service</p>`
+      isFeedback = true;
+    }
+    // set time out for removing feedback section after 10 sec
+    setTimeout(function () {
       feedback.classList.remove('showItem', 'alert-danger');
     }, 10000);
 
@@ -309,93 +237,103 @@ const services = [{
 
   }; // end validateInput
 
-  const calculateTip = function(billAmount, numUsers, selectedService) {
+
+  
+  /////////////////////////
+  const calculateTip = function (billAmount, numUsers, selectedService) {
 
     let percentTip = '';
-    if (selectedService === "1"){
+    if (selectedService === "1") {
       percentTip = 0.2;
-    } else if (selectedService === "2"){
+    } else if (selectedService === "2") {
       percentTip = 0.1;
     } else {
       percentTip = 0.02;
     }
 
-    const tipAmount = Number(billAmount)*percentTip;
+    const tipAmount = Number(billAmount) * percentTip;
+    console.log('check tipAmount: ' + tipAmount);
     const totalAmount = Number(billAmount) + Number(tipAmount);
+    console.log('check totalAmount: ' + totalAmount);
     const eachPerson = Number(totalAmount) / Number(numUsers);
+    console.log('check eachPerson: ' + eachPerson);
 
     return [tipAmount, totalAmount, eachPerson];
 
 
   };
+  
 
- //FORM SETUP - ADD SERVICES
-services.forEach(function(service){
-  //create the option element
-  const option = document.createElement('option');
-  option.textContent = service.title;
-  option.value = service.value;
-  //select the select element from the DOM
-  const select = document.querySelector('#input-service');
-  select.appendChild(option);
-})
+  //FORM SETUP - ADD SERVICES
+  services.forEach(function (service) {
+    //create the option element
+    const option = document.createElement('option');
+    option.textContent = service.title;
 
- //FORM SETUP - ADD EVENT LISTENER AND FUNCTION CALLS
-  const inputForm = document.querySelector('form');
-  inputForm.addEventListener('submit', function(e){
+    option.value = service.value;
 
-  e.preventDefault();
-
-  //grab elements from the DOM
-  const inputBill = document.querySelector('#input-bill');
-  const inputUsers = document.querySelector('#input-users');
-  const serviceValue = document.querySelector('#input-service');
-
-   //get values from DOM elements
-  let billAmount = inputBill.value;
-  let  numUsers = inputUsers.value;
-  let selectedService = serviceValue.value;
-
-  //get feedback if info is not validated
-  const isFeedback = validateInput(billAmount, numUsers, selectedService);
-
-
-
-   //calculated tip if info was validated
-    if (!isFeedback){
-        const loader = document.querySelector('.loader');
-        const resultsDOM = document.querySelector('.results');
-        const tipResultsDOM = document.querySelector('#tip-amount');
-        const totalAmountDOM = document.querySelector('#total-amount');
-        const eachPersonDOM = document.querySelector('#person-amount');
-
-       //calculate results
-        const results = calculateTip(billAmount, numUsers, selectedService);
-       //show loader
-       loader.classList.add('showItem');
-       // show results after 2 seconds
-       setTimeout(function(){
-        loader.classList.remove('showItem');
-        tipResultsDOM.textContent= `${results[0].toFixed(2)}`
-        totalAmountDOM.textContent= `${results[1].toFixed(2)}`
-        eachPersonDOM.textContent= `${results[2].toFixed(2)}`
-        resultsDOM.classList.add('showItem');
-      },2000)
-
-      //clear values from DOM elements after 5 seconds
-      setTimeout(function(){
-        inputBill.value = '';
-        inputUsers.value = '';
-        serviceValue.value = 0;
-        resultsDOM.classList.remove('showItem');
-      }, 10000)
-
-
-    } //end isFeedback statement
-
-  }); //end eventListener for form
-
+    //select the select element from the DOM
+    const select = document.querySelector('#input-service');
+    select.appendChild(option);
+  })
+  
+   //FORM SETUP - ADD EVENT LISTENER AND FUNCTION CALLS
+    const inputForm = document.querySelector('form');
+    inputForm.addEventListener('submit', function(e){
+  
+    e.preventDefault();
+   
+      
+    //grab elements from the DOM
+    const inputBill = document.querySelector('#input-bill');
+    const inputUsers = document.querySelector('#input-users');
+    const serviceValue = document.querySelector('#input-service');
+  
+     //get values from DOM elements
+    let billAmount = inputBill.value;
+    let  numUsers = inputUsers.value;
+    let selectedService = serviceValue.value;
+  
+    //get feedback if info is not validated
+    const isFeedback = validateInput(billAmount, numUsers, selectedService);
+    console.log('check isFeedback: ' + isFeedback);
+  
+     //calculated tip if info was validated
+      if (!isFeedback){
+          const loader = document.querySelector('.loader');
+          const resultsDOM = document.querySelector('.results');
+          const tipResultsDOM = document.querySelector('#tip-amount');
+          const totalAmountDOM = document.querySelector('#total-amount');
+          const eachPersonDOM = document.querySelector('#person-amount');
+  
+         //calculate results
+          const results = calculateTip(billAmount, numUsers, selectedService);
+          console.log('check results: ' + results)
+         //show loader
+         loader.classList.add('showItem');
+         // show results after 2 seconds
+         
+         setTimeout(function(){
+          loader.classList.remove('showItem');
+          tipResultsDOM.textContent= `${results[0].toFixed(2)}`
+          totalAmountDOM.textContent= `${results[1].toFixed(2)}`
+          eachPersonDOM.textContent= `${results[2].toFixed(2)}`
+          resultsDOM.classList.add('showItem');
+        },2000)
+  
+        //clear values from DOM elements after 5 seconds
+        setTimeout(function(){
+          inputBill.value = '';
+          inputUsers.value = '';
+          serviceValue.value = 0;
+          resultsDOM.classList.remove('showItem');
+        }, 10000)
+  
+  
+      } //end isFeedback statement
+      
+    }); //end eventListener for form
+  
 
 })();
 
-*/
