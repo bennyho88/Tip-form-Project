@@ -123,8 +123,16 @@
 
     // show feedback
 
+    // display feedback section for 5 sec
+
     feedback.classList.add('showItem');
     feedback.classList.add('alert-danger');
+
+    setInterval(function() {
+      feedback.classList.remove('showItem');
+    }, 5000)
+
+    
 
     
     if(inputBill.value !== '') {
@@ -147,6 +155,7 @@
     }  else if (inputService.value === '1' || inputService.value === '2' || inputService.value === '3') {
       feedbackTextService.style.display = 'none';
     }
+    
     
   
 
